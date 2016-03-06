@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="BingWallpaper.SettingControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BingWallpaper"
+             mc:Ignorable="d" 
+             d:DesignHeight="360" d:DesignWidth="640" Background="Transparent">
+
+    <UserControl.Resources>
+        <Storyboard x:Key="OpenBoard" Storyboard.TargetName="XGrid">
+            <DoubleAnimation From="1" To="0" Duration="0:0:1.2" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[1].Offset"/>
+            <DoubleAnimation From="1" To="0" Duration="0:0:1" BeginTime="0:0:0.2" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Offset"/>
+            <ColorAnimation To="#FFFF0000"  Duration="0" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Color">
+            </ColorAnimation>
+        </Storyboard>
+        <LinearGradientBrush x:Key="OpenBrush"  StartPoint="0.5,1" EndPoint="0.5,0">
+            <GradientStop Color="#00000000" Offset="0"/>
+            <GradientStop Color="#00000000" Offset="1"/>
+            <GradientStop Color="#00000000" Offset="1"/>
+        </LinearGradientBrush>
+        <Storyboard x:Key="CloseBoard" Storyboard.TargetName="XGrid">
+            <DoubleAnimation From="1" To="0" Duration="0:0:1.2" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[1].Offset"/>
+            <DoubleAnimation From="1" To="0" Duration="0:0:1" BeginTime="0:0:0.2" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Offset"/>
+            <ColorAnimation To="#00000000"  Duration="0" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Color">
+            </ColorAnimation>
+        </Storyboard>
+        <LinearGradientBrush x:Key="CloseBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#FFFF0000" Offset="0"/>
+            <GradientStop Color="#FFFF0000" Offset="1"/>
+            <GradientStop Color="#FFFF0000" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+
+    <Grid x:Name="XGrid" Width="640" Height="360" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White">
+        <Label Content="Setting" Width="139" Margin="152,10,159,284" FontFamily="Microsoft YaHei UI Light" FontSize="32" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+
+        <Grid Width="450" Height="60" Margin="0,80,0,220">
+            <Label Content="Start Setting" FontSize="13.333" Margin="0,5,0,0" Width="130" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+            <CheckBox x:Name="CB_AutoSet" Content="Set today's Bing wallpaper automatically" Width="280" Height="20" FontSize="13.333" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" Cursor="Pen" IsChecked="{Binding Path=AutoSet, Mode=TwoWay}"/>
+            <CheckBox x:Name="CB_Start" Content="Start with Windows" FontSize="13.333" Width="280" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,5" Cursor="Pen" IsChecked="{Binding Path=AutoStart, Mode=TwoWay}"/>
+        </Grid>
+
+        <Grid Width="450" Height="190" Margin="0,130,0,0">
+
+            <Label Content="Save Setting" FontSize="13.333" Margin="0,5,0,0" Width="130" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+
+            <Label Content="Location to save Bing wallpaper" FontSize="13.333"  Width="285" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0"/>
+
+            <Button x:Name="ChangePath" Content="..." Background="White" Width="30" Height="30" Margin="410,35,10,125" Cursor="Hand" Click="ChangePath_Click"/>
+            <TextBox x:Name="SavedPath" FontSize="13.333" Width="245" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,45,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=StoreDirectory, Mode=TwoWay}"/>
+
+            <Label Content="Wallpaper Setting" FontSize="13.333" Margin="0,75,0,0" Width="130" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+
+            <Label Content="Region for wallpaper" FontSize="13.333"  Width="285" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,75,10,0"/>
+            <ComboBox x:Name="CB_Region" FontSize="13.333"  Width="140" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,105,150,0" Text="{Binding Path=Region, Mode=TwoWay}"/>
+
+            <Label Content="Size for wallpaper" FontSize="13.333"  Width="285" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,10,0"/>
+            <ComboBox x:Name="CB_Size" FontSize="13.333"  Width="140" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,160,150,0" Text="{Binding Path=Size, Mode=TwoWay}"/>
+
+        </Grid>
+
+    </Grid>
+
+</UserControl>
